@@ -1,0 +1,28 @@
+{
+  "name": "cosine-gradient",
+  "version": "0.1.0",
+  "description": "Cosine gradient generator",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "Marcin Ignac",
+    "email": "marcin.ignac@gmail.com",
+    "url": "https://github.com/vorg"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "color"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vorg/cosine-gradient.git"
+  },
+  "homepage": "https://github.com/vorg/cosine-gradient",
+  "bugs": {
+    "url": "https://github.com/vorg/cosine-gradient/issues"
+  }
+}

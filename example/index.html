@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cosine Gradient</title>
+<script type="text/javascript">
+var module = {};
+</script>
+<script src="../index.js"></script>
+</head>
+<body>
+<canvas width="400" height="50"></canvas>
+<script type="text/javascript">
+var cosineGradient = module.exports;
+
+var scheme = [[0.000,0.500,0.500],[0.000,0.500,0.500],[0.000,0.500,0.333],[0.000,0.500,0.667]];
+var gradient = cosineGradient(scheme[0], scheme[1], scheme[2], scheme[3]);
+
+var canvas = document.querySelector('canvas');
+var ctx = canvas.getContext('2d');
+
+for(var i=0; i<100; i++) {
+    var t = i / 100;
+    var c = gradient(t);
+    var rgb = [255 * c[0] | 0, 255 * c[1] | 0, 255 * c[2] | 0];
+    var cssColor = 'rgb(' + rgb.join(',') + ')';
+  
+    console.log(i, t, c, rgb); 
+    ctx.fillStyle = cssColor;
+    ctx.fillRect(i*4, 0, 4, 50);
+}
+</script>
+</body>
+</html>
