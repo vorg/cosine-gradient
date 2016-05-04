@@ -9,26 +9,71 @@ var module = {};
 <script src="../index.js"></script>
 </head>
 <body>
-<canvas width="400" height="50"></canvas>
+<canvas width="1220" height="400"></canvas>
 <script type="text/javascript">
 var cosineGradient = module.exports;
 
-var scheme = [[0.000,0.500,0.500],[0.000,0.500,0.500],[0.000,0.500,0.333],[0.000,0.500,0.667]];
-var gradient = cosineGradient(scheme[0], scheme[1], scheme[2], scheme[3]);
-
-var canvas = document.querySelector('canvas');
-var ctx = canvas.getContext('2d');
-
-for(var i=0; i<100; i++) {
-    var t = i / 100;
-    var c = gradient(t);
-    var rgb = [255 * c[0] | 0, 255 * c[1] | 0, 255 * c[2] | 0];
-    var cssColor = 'rgb(' + rgb.join(',') + ')';
-  
-    console.log(i, t, c, rgb); 
-    ctx.fillStyle = cssColor;
-    ctx.fillRect(i*4, 0, 4, 50);
+var schemes = {
+    'RAINBOW': [[0.500,0.500,0.500],[0.500,0.500,0.500],[1.000,1.000,1.000],[0.000,0.333,0.667]],
+    'BLUE-CYAN': [[0.000,0.500,0.500],[0.000,0.500,0.500],[0.000,0.500,0.333],[0.000,0.500,0.667]],
+    'YELLOW-GREEN-BLUE': [[0.650,0.500,0.310],[-0.650,0.500,0.600],[0.333,0.278,0.278],[0.660,0.000,0.667]]
 }
+
+for(var schemeName in schemes) {
+    var scheme = schemes[schemeName];
+
+    var gradient = cosineGradient(scheme[0], scheme[1], scheme[2], scheme[3]);
+
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+
+    for(var i=0; i<=100; i++) {
+        var t = i / 100;
+        var c = gradient(t);
+        var rgb = [255 * c[0] | 0, 255 * c[1] | 0, 255 * c[2] | 0];
+        var cssColor = 'rgb(' + rgb.join(',') + ')';
+
+        console.log(i, t, c, rgb);
+        ctx.fillStyle = cssColor;
+        ctx.fillRect(i*4, 35, 4, 40);
+    }
+
+    var channelColor = ["#FF0000", "#00FF00", "#0000FF"];
+
+    var h = 2 * 400/(Math.PI*2)
+
+    for(var channel=0; channel<3; channel++) {
+        ctx.strokeStyle = channelColor[channel];
+        ctx.beginPath()
+        for(var i=0; i<=100; i++) {
+            var t = i / 100;
+            var c = gradient(t);
+            var x = i * 4;
+            var y = 50 + 50 + h - c[channel] * h;
+            if (i == 0) {
+                ctx.moveTo(x, y)
+            }
+            else {
+                ctx.lineTo(x, y)
+            }
+        }
+        ctx.stroke()
+    }
+
+    ctx.fillStyle = "#666666"
+    ctx.font = "normal 10pt Arial";
+    ctx.fillText(schemeName, 0, 20)
+
+    ctx.strokeStyle = "#666666"
+    ctx.beginPath();
+    ctx.moveTo(1, 50 + 50);
+    ctx.lineTo(1, 50 + 50 + h);
+    ctx.lineTo(400, 50 + 50 + h);
+    ctx.stroke()
+
+    ctx.translate(400 + 10, 0)
+}
+
 </script>
 </body>
 </html>
