@@ -1,5 +1,7 @@
 # cosine-gradient
 
+![](screenshot.png)
+
 [![stable](http://badges.github.io/stability-badges/dist/stable.svg)](http://github.com/badges/stability-badges)
 
 Cosine gradient generator
@@ -7,6 +9,40 @@ Cosine gradient generator
 ## Usage
 
 [![NPM](https://nodei.co/npm/cosine-gradient.png)](https://www.npmjs.com/package/cosine-gradient)
+
+
+#### cosineGradient(schema)
+
+returns function
+
+#### hammersley(i, n)
+
+Parameters:  
+`schema` - array of cosine coefficients for R,G,B channels
+
+Returns:  
+`function(t)` - a function calculating a color value for t=0..1. The returned color is an array `[0..1, 0..1, 0..1]`
+
+
+## Example
+
+To get the middle blue gradient from the screenshot you would:
+
+```javascript
+var cosineGradient = require('cosine-gradient');
+var schema = [
+    [0.000,0.500,0.500],
+    [0.000,0.500,0.500],
+    [0.000,0.500,0.333],
+    [0.000,0.500,0.667]
+];
+var gradient = cosineGradient(schema);
+
+for(var i=0; i<=100; i++) {
+    var t = i / 100;
+    var color = gradient(t); //[R=0..1, G=0..1, B=0..1]
+}
+```
 
 ## Credits
 
