@@ -4,6 +4,12 @@
 //d - phase
 function cosineGradient(a, b, c, d) {
     var TwoPI = Math.PI * 2;
+    if (a && !b && !c && !d) {
+        b = a[1];
+        c = a[2];
+        d = a[3];
+        a = a[0];
+    }
     return function(t) {
         return [
             a[0] + b[0] * Math.cos(TwoPI * (c[0] * t + d[0])),
