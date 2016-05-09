@@ -22,7 +22,7 @@ var schemes = {
 for(var schemeName in schemes) {
     var scheme = schemes[schemeName];
 
-    var gradient = cosineGradient(scheme[0], scheme[1], scheme[2], scheme[3]);
+    var gradient = cosineGradient(scheme);
 
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
