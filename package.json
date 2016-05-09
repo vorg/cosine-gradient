@@ -1,6 +1,6 @@
 {
   "name": "cosine-gradient",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cosine gradient generator",
   "main": "index.js",
   "license": "MIT",
