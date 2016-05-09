@@ -11,14 +11,10 @@ Cosine gradient generator
 [![NPM](https://nodei.co/npm/cosine-gradient.png)](https://www.npmjs.com/package/cosine-gradient)
 
 
-#### cosineGradient(schema)
-
-returns function
-
-#### hammersley(i, n)
+#### cosineGradient(scheme)
 
 Parameters:  
-`schema` - array of cosine coefficients for R,G,B channels
+`scheme` - array of cosine coefficients for R,G,B channels
 
 Returns:  
 `function(t)` - a function calculating a color value for t=0..1. The returned color is an array `[0..1, 0..1, 0..1]`
@@ -30,13 +26,13 @@ To get the middle blue gradient from the screenshot you would:
 
 ```javascript
 var cosineGradient = require('cosine-gradient');
-var schema = [
+var scheme = [
     [0.000,0.500,0.500],
     [0.000,0.500,0.500],
     [0.000,0.500,0.333],
     [0.000,0.500,0.667]
 ];
-var gradient = cosineGradient(schema);
+var gradient = cosineGradient(scheme);
 
 for(var i=0; i<=100; i++) {
     var t = i / 100;
